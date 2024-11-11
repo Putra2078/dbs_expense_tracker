@@ -36,10 +36,13 @@ include_once('templates/header.php');
                       </thead>
 
                       <tbody>
-                      <?php
-                      $aktiva_incomes = "SELECT SUM(amount) FROM incomes where descriptions = 'kas'";
-                      echo  "<tr>";
-                      echo "<td> Kas </td>";
+                        <?php
+                        $neraca = "SELECT SUM(amount) AS Kas FROM incomes WHERE category = 'aktiva' AND descriptions = 'kas'";
+                      echo "<tr>";
+                        echo "<td>" . "</td>"; 
+                        echo "<td>" . "</td>";
+                        echo "<td>" . "</td>";
+                      echo "</tr>";
                       ?>
                       </tbody>
 <?php

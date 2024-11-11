@@ -78,7 +78,7 @@
                 <ul class="nav side-menu">
                   <li><a href="view_summary.php"><i class="fa fa-home"></i> Home </a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Add Income / Expense <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="add_income.php">Add Income</a></li>
                       <li><a href="add_expense.php">Add Expense</a></li>
@@ -120,7 +120,7 @@
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>
-                      <a class="dropdown-item"  href="../edit-user.php">
+                      <a class="dropdown-item"  href="profile.php">
                         <span>Settings</span>
                       </a>
                   <a class="dropdown-item"  href="javascript:;">Help</a>

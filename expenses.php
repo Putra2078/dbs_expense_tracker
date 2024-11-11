@@ -47,6 +47,7 @@ include_once('templates/header.php');
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
+                          <th>No</th>
                           <th>Tanggal</th>
                           <th>Category</th>
                           <th>Notes</th>
@@ -70,6 +71,7 @@ include_once('templates/header.php');
 
                 $sql .= " ORDER BY date DESC";
                 
+                $no = 1;
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($params);
                 $expenses = $stmt->fetchAll();
@@ -78,6 +80,7 @@ include_once('templates/header.php');
                     $tanggal = date('d M Y', strtotime($expense['date']));
 
                     echo "<tr>";
+                    echo "<td>" . $no++ . "</td>";
                     echo "<td>" . $tanggal . "</td>";
                     echo "<td>" . $expense['category'] . "</td>";
                     echo "<td>" . $expense['notes'] . "</td>";

@@ -26,48 +26,48 @@ include_once('templates/header.php');
                     <hr>
 <div class="x_content">
         <form action="add_income.php" method="post">
+
             <div class="mb-3">
-                <label for="date" class="form-label">Date:</label>
-                <input type="date" id="date" name="date" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="category" class="form-label">Source:</label>
-                <select type="text" id="category" name="category" class="form-control" required>
-                    <option value="aktiva">Kas</option>
+                <label for="category" class="form-label">Category:</label>
+                <select id="category" name="category" class="form-control" required>
+                    <option value="aktiva">Aktiva</option>
                     <option value="kewajiban">Kewajiban</option>
                     <option value="ekuitas">Ekuitas</option>
                 </select>
             </div>
+
             <div class="mb-3">
                 <label for="amount" class="form-label">Amount:</label>
                 <input type="number" id="amount" name="amount" class="form-control" required>
             </div>
-            <div class="mb-3">
-                <label for="notes" class="form-label">Notes</label>
-                <textarea class="form-control" id="notes" name="notes"></textarea>
-            </div>
+
             <div class="mb-3">
                 <label for="descriptions" class="form-label">Description:</label>
-                <select id="descriptions" name="descriptions" class="form-control">
+                <select id="descriptions" name="descriptions" class="form-control" required>
                     <option value="kas">Kas</option>
                     <option value="dividen saham">Dividen Saham</option>
                     <option value="gaji">Gaji</option>
                     <option value="pendapatan tambahan">Pendapatan Tambahan</option>
                 </select>
             </div>
+
+            <div class="mb-3">
+                <label for="notes" class="form-label">Notes:</label>
+                <textarea class="form-control" id="notes" name="notes"></textarea>
+            </div>
             <button type="submit" class="btn btn-primary">Add Income</button>
         </form>
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $date = $_POST['date'];
-            $category = $_POST['category'];
-            $notes = $_POST['category'];
+            $date = date("Y-m-d");
             $amount = $_POST['amount'];
+            $category = $_POST['category'];
             $descriptions = $_POST['descriptions'];
+            $notes = $_POST['notes'];
 
-            $sql = "INSERT INTO incomes (user_id, date, category, amount, descriptions, notes) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO incomes (user_id, date, amount, category, descriptions, notes) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
-            if ($stmt->execute([$_SESSION['user_id'], $date, $category, $notes, $amount, $descriptions])) {
+            if ($stmt->execute([$_SESSION['user_id'], $date, $amount, $category, $descriptions, $notes])) {
                 echo "<div class='alert alert-success mt-3'>Income added successfully!</div>";
             } else {
                 echo "<div class='alert alert-danger mt-3'>Failed to add income!</div>";

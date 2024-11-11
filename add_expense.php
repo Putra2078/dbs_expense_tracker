@@ -27,10 +27,6 @@ include_once('templates/header.php');
     <div class="x_content">
         <form action="add_expense.php" method="post">
             <div class="mb-3">
-                <label for="date" class="form-label">Date:</label>
-                <input type="date" id="date" name="date" class="form-control" required>
-            </div>
-            <div class="mb-3">
                 <label for="category" class="form-label">Category:</label>
                 <select id="category" name="category" class="form-control" required>
                     <option value="aktiva">Aktiva</option>
@@ -63,7 +59,7 @@ include_once('templates/header.php');
 
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $date = $_POST['date'];
+            $date = date("Y-m-d");
             $category = $_POST['category'];
             $amount = $_POST['amount'];
             $description = $_POST['description'];

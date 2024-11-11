@@ -47,6 +47,7 @@ include_once('templates/header.php');
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
+                          <th>No</th>
                           <th>Tanggal</th>
                           <th>Category</th>
                           <th>Notes</th>
@@ -69,6 +70,8 @@ include_once('templates/header.php');
                 }
 
                 $sql .= " ORDER BY date DESC";
+
+                $no = 1;
                 
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute($params);
@@ -78,6 +81,7 @@ include_once('templates/header.php');
                     $tanggal = date('d M Y', strtotime($income['date']));
 
                     echo "<tr>";
+                    echo "<td>" . $no++ . "</td>";
                     echo "<td>" . $tanggal . "</td>";
                     echo "<td>" . $income['category'] . "</td>";
                     echo "<td>" . $income['notes'] . "</td>";
@@ -99,23 +103,6 @@ include_once('templates/header.php');
           </div>
         </div>
         <!-- /page content -->
-
-<?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $date = $_POST['date'];
-            $source = $_POST['source'];
-            $amount = $_POST['amount'];
-            $description = $_POST['description'];
-
-            $sql = "INSERT INTO incomes (user_id, date, source, amount, description) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            if ($stmt->execute([$_SESSION['user_id'], $date, $source, $amount, $description])) {
-                echo "<div class='alert alert-success mt-3'>Income added successfully!</div>";
-            } else {
-                echo "<div class='alert alert-danger mt-3'>Failed to add income!</div>";
-            }
-        }
-?>
 
   </body>
 
