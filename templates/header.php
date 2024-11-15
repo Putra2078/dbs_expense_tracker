@@ -1,9 +1,4 @@
 <?php
-// memulai session
-// session_start();
-// if (!isset($_SESSION['login'])) {
-//   header("Location: login.php");
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,11 +55,34 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>Aldiansyah</h2>
+                <h2> <?php
+
+                  // Pastikan user sudah login
+                  if(!isset($_SESSION['user_id'])) {
+                      header('Location: login.php');
+                      exit;
+                  }
+
+                  // Ambil username
+                  try {
+                      $sql = "SELECT username FROM users WHERE id = ?";
+                      $stmt = $pdo->prepare($sql);
+                      $stmt->execute([$_SESSION['user_id']]);
+                      $user = $stmt->fetch();
+                      
+                      if($user) {
+                          $username = htmlspecialchars($user['username']);
+                      } else {
+                          $username = 'Pengguna';
+                      }
+                  } catch(PDOException $e) {
+                      // Tangani error
+                      $username = 'Pengguna';
+                  }
+                  ?>  Selamat datang, <?php echo $username; ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -116,7 +134,7 @@
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Aldi
+                    <img src="images/img.jpg" alt=""><?php echo $username; ?>
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item"  href="javascript:;"> Profile</a>
@@ -124,7 +142,7 @@
                         <span>Settings</span>
                       </a>
                   <a class="dropdown-item"  href="javascript:;">Help</a>
-                    <a class="dropdown-item"  href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    <a class="dropdown-item"  href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                   </div>
                 </li>
 

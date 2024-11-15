@@ -1,7 +1,6 @@
 <?php
 include('db.php');
 include_once('templates/header.php');
-
 ?>
 
 <!-- page content -->
@@ -29,15 +28,15 @@ include_once('templates/header.php');
                     <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                       <thead>
                         <tr>
-                          <th>Aktiva</th>
-                          <th>Kewajiban</th>
-                          <th>Ekuitas</th>
+                          <th>Jenis</th>
+                          <th></th>
+                          <th></th>
                         </tr>
                       </thead>
 
                       <tbody>
                         <?php
-                        $neraca = "SELECT SUM(amount) AS Kas FROM incomes WHERE category = 'aktiva' AND descriptions = 'kas'";
+
                       echo "<tr>";
                         echo "<td>" . "</td>"; 
                         echo "<td>" . "</td>";
